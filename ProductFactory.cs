@@ -8,6 +8,7 @@ namespace ProductLib
     {
         public static Product CreateProduct(string typeName, double purchasePrice, string name, double markUp, uint amount)
         {
+            throw new Exception();
             switch(typeName)
             {
                 case "Food":
