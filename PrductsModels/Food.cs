@@ -27,4 +27,4 @@ namespace ProductLib
             return new Food((one.PurchasePrice+two.PurchasePrice)/2, one.Name, (one.MarkUp + two.MarkUp) / 2, one.Amount+two.Amount);
         }
     }
-}А
+}
