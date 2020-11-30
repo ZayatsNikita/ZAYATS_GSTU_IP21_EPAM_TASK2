@@ -21,8 +21,9 @@ namespace ProductLib
             JsonFileManger jsonFileManger = new JsonFileManger();
             ProductCollection collection = new ProductCollection();
             collection.Add(array);
+            array = null;
             jsonFileManger.WriteDataToFile(collection, @"D:\Learn\EPAM\task2\ClassLibrary1\data.json");
-            jsonFileManger.ReadDataToFile(@"D:\Learn\EPAM\task2\ClassLibrary1\data.json");
+            array =jsonFileManger.ReadDataToFile(@"D:\Learn\EPAM\task2\ClassLibrary1\data.json");
 
         }
     }

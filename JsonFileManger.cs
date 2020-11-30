@@ -45,21 +45,22 @@ namespace ProductLib
 
                     ProductCollection products = JsonSerializer.Deserialize<ProductCollection>(jsonUtf8Bytes);
 
-                    int length = (products?.Length ?? 0);
+                    int length = (products?.Length ?? 0), errorsNum=0;
                     Product[] productsArray = new Product[length];
-
+                    //Span<Product> span = new Span<Product>(productsArray);
                     for (int index = 0; index < length; index++)
                     {
                         try
                         {
-                            productsArray[index] = ProductFactory.CreateProduct(products.Parameters[index], products.Products[index].PurchasePrice, products.Products[index].Name, products.Products[index].MarkUp, products.Products[index].Amount);
+                            productsArray[index- errorsNum] = ProductFactory.CreateProduct(products.Parameters[index], products.Products[index].PurchasePrice, products.Products[index].Name, products.Products[index].MarkUp, products.Products[index].Amount);
                         }
-                        catch()
+                        catch(ArgumentException)
+                        {
+                            errorsNum++;
+                        }
                     }
-                    
-
-
-                    Console.WriteLine();
+                    Array.Resize(ref productsArray, length - errorsNum);
+                    return productsArray;
                 }
             }
             else throw new FileNotFoundException();

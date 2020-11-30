@@ -26,5 +26,15 @@ namespace ProductLib
                 throw new ProductNameException();
             return new Food((one.PurchasePrice+two.PurchasePrice)/2, one.Name, (one.MarkUp + two.MarkUp) / 2, one.Amount+two.Amount);
         }
+
+        public static implicit operator Electronics(Food product)
+        {
+            return new Electronics(product.PurchasePrice, product.Name + "-electronics", product.MarkUp, product.Amount);
+        }
+        public static implicit operator Wear(Food product)
+        {
+            return new Wear(product.PurchasePrice, product.Name + "-wear", product.MarkUp, product.Amount);
+        }
+
     }
 }
