@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.IO;
 
-//Пространство имен System.Text.Json содержит все точки входа и основные типы. Пространство имен
-//System.Text.Json.Serialization содержит атрибуты и интерфейсы API для сложных сценариев и настройки,
-//характерной для сериализации и десериализации. В примерах кода, приведенных в этой статье, для одного
-//или обоих пространств имен необходимо добавить директивы  using :
 
 namespace ProductLib
 {
     class JsonFileManger
     {
-       public void WriteDataToFile(IEnumerable<Product> products, string path)
-       {
+        public void WriteDataToFile(Product[] products, string path)
+        {
             if (File.Exists(path))
             {
-                var options = new JsonWriterOptions
+                JsonWriterOptions options = new JsonWriterOptions
                 {
                     Indented = true
                 };
@@ -26,22 +20,16 @@ namespace ProductLib
                 {
                     using (Utf8JsonWriter writer = new Utf8JsonWriter(filesStream, options))
                     {
-
-                        foreach (Product product in products)
-                        {
-                            JsonSerializer.Serialize<Product>(writer, product);
-                        }
+                        JsonSerializer.Serialize(writer, products);
                     }
                 }
             }
             else throw new FileNotFoundException();
-       }
-       public void ReadDataToFile(IEnumerable<Product> products, string path)
-       {
+        }
+        public Product[] ReadDataToFile(string path)
+        {
             if (File.Exists(path))
             {
-
-
                 var options = new JsonReaderOptions
                 {
                     AllowTrailingCommas = true,
@@ -50,16 +38,50 @@ namespace ProductLib
                 using (FileStream filesStream = new FileStream(path, FileMode.OpenOrCreate))
                 {
                     byte[] jsonUtf8Bytes = new byte[filesStream.Length];
-                    filesStream.Read(jsonUtf8Bytes,0, jsonUtf8Bytes.Length);
+
+                    filesStream.Read(jsonUtf8Bytes, 0, jsonUtf8Bytes.Length);
 
                     Utf8JsonReader reader = new Utf8JsonReader(jsonUtf8Bytes, options);
 
-                    var t = JsonSerializer.Deserialize<Product>(ref reader);
+                    ProductCollection products = JsonSerializer.Deserialize<ProductCollection>(jsonUtf8Bytes);
+
+                    int length = (products?.Length ?? 0);
+                    Product[] productsArray = new Product[length];
+
+                    for (int index = 0; index < length; index++)
+                    {
+                        try
+                        {
+                            productsArray[index] = ProductFactory.CreateProduct(products.Parameters[index], products.Products[index].PurchasePrice, products.Products[index].Name, products.Products[index].MarkUp, products.Products[index].Amount);
+                        }
+                        catch()
+                    }
                     
+
+
+                    Console.WriteLine();
                 }
             }
             else throw new FileNotFoundException();
-       }
+        }
 
+        public void WriteDataToFile(ProductCollection collection, string path)
+        {
+            if (File.Exists(path))
+            {
+                JsonWriterOptions options = new JsonWriterOptions
+                {
+                    Indented = true
+                };
+                using (FileStream filesStream = new FileStream(path, FileMode.OpenOrCreate))
+                {
+                    using (Utf8JsonWriter writer = new Utf8JsonWriter(filesStream, options))
+                    {
+                        JsonSerializer.Serialize(writer, collection);
+                    }
+                }
+            }
+            else throw new FileNotFoundException();
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace ProductLib.FactoriesForSubclassesOfProducts
 {
     internal class ElectronicsFactory
     {
-        public static Electronics CreateElectronics(double purchasePrice, string name, double markUp, uint amount)
+        public static Electronics CreateProduct(double purchasePrice, string name, double markUp, uint amount)
         {
             return new Electronics(purchasePrice, name, markUp, amount);
         }

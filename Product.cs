@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProductLib
 {
-    public abstract class Product
+    public class Product
     {
         public Product()
         {
@@ -20,11 +20,11 @@ namespace ProductLib
             MarkUp = markUp;
             Amount = amount;
         }
-        public virtual double PurchasePrice { get;protected set; }
-        public virtual string Name { get; protected set; }
+        public virtual double PurchasePrice { get; set; }
+        public virtual string Name { get;  set; }
         
-        public virtual double MarkUp { get; protected set; }
-        public virtual uint Amount { get; protected set; }
+        public virtual double MarkUp { get;  set; }
+        public virtual uint Amount { get;  set; }
 
         public double GetFullPriceOfAllProducts()
         {
@@ -34,8 +34,5 @@ namespace ProductLib
         {
             return PurchasePrice + MarkUp;
         }
-        
-
-
     }
 }
