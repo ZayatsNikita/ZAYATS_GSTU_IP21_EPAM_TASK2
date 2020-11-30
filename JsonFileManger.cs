@@ -6,27 +6,9 @@ using System.IO;
 
 namespace ProductLib
 {
-    class JsonFileManger
+    public class JsonFileManger
     {
-        public void WriteDataToFile(Product[] products, string path)
-        {
-            if (File.Exists(path))
-            {
-                JsonWriterOptions options = new JsonWriterOptions
-                {
-                    Indented = true
-                };
-                using (FileStream filesStream = new FileStream(path, FileMode.OpenOrCreate))
-                {
-                    using (Utf8JsonWriter writer = new Utf8JsonWriter(filesStream, options))
-                    {
-                        JsonSerializer.Serialize(writer, products);
-                    }
-                }
-            }
-            else throw new FileNotFoundException();
-        }
-        public Product[] ReadDataToFile(string path)
+        public static Product[] ReadDataToFile(string path)
         {
             if (File.Exists(path))
             {
@@ -35,7 +17,7 @@ namespace ProductLib
                     AllowTrailingCommas = true,
                     CommentHandling = JsonCommentHandling.Skip
                 };
-                using (FileStream filesStream = new FileStream(path, FileMode.OpenOrCreate))
+                using (FileStream filesStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     byte[] jsonUtf8Bytes = new byte[filesStream.Length];
 
@@ -66,15 +48,17 @@ namespace ProductLib
             else throw new FileNotFoundException();
         }
 
-        public void WriteDataToFile(ProductCollection collection, string path)
+        public static void WriteDataToFile(Product[] array, string path)
         {
             if (File.Exists(path))
             {
+                ProductCollection collection = new ProductCollection();
+                collection.Add(array);
                 JsonWriterOptions options = new JsonWriterOptions
                 {
                     Indented = true
                 };
-                using (FileStream filesStream = new FileStream(path, FileMode.OpenOrCreate))
+                using (FileStream filesStream = new FileStream(path, FileMode.Create))
                 {
                     using (Utf8JsonWriter writer = new Utf8JsonWriter(filesStream, options))
                     {

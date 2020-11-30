@@ -5,7 +5,7 @@ namespace ProductLib
 {
     public class Electronics : Product
     {
-        public Electronics(double purchasePrice, string name, double markUp, uint amount)
+        public Electronics(double purchasePrice, string name, double markUp, int amount)
             : base(purchasePrice, name, markUp, amount) {; }
         public static Electronics operator -(Electronics electronics, int amount)
         {
@@ -14,7 +14,7 @@ namespace ProductLib
             if (electronics.Amount - amount < 0)
                 throw new ProductPriceException("Attempt to create an object with a negative number of product instances");
 
-            return new Electronics(electronics.PurchasePrice, electronics.Name, electronics.MarkUp, electronics.Amount - (uint)amount);
+            return new Electronics(electronics.PurchasePrice, electronics.Name, electronics.MarkUp, electronics.Amount - amount);
         }
         public static Electronics operator +(Electronics one, Electronics two)
         {
@@ -25,11 +25,11 @@ namespace ProductLib
             return new Electronics((one.PurchasePrice + two.PurchasePrice) / 2, one.Name, (one.MarkUp + two.MarkUp) / 2, one.Amount + two.Amount);
         }
 
-
         public static implicit operator Food(Electronics product)
         {
             return new Food(product.PurchasePrice, product.Name + "-food", product.MarkUp, product.Amount);
         }
+       
         public static implicit operator Wear(Electronics product)
         {
             return new Wear(product.PurchasePrice, product.Name + "-wear", product.MarkUp, product.Amount);

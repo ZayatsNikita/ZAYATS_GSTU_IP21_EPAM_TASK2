@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ProductLib.ProductExceptions
 {
-    class ProductAmountException : ArgumentException
+    public class ProductAmountException : ArgumentException
     {
-        ProductAmountException()
+        public ProductAmountException()
             : base("The mark-up parameter is out of bounds") { }
-        ProductAmountException(string message)
+        public ProductAmountException(string message)
             : base(message) { }
 
     }

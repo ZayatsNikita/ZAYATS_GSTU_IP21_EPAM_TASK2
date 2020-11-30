@@ -7,7 +7,7 @@ namespace ProductLib
 {
     public class Wear : Product
     {
-        public Wear(double purchasePrice, string name, double markUp, uint amount)
+        public Wear(double purchasePrice, string name, double markUp, int amount)
             : base(purchasePrice, name, markUp, amount) {; }
         public static Wear operator -(Wear wear, int amount)
         {
@@ -15,7 +15,7 @@ namespace ProductLib
                 throw new NullReferenceException();
             if (wear.Amount - amount < 0)
                 throw new ProductPriceException("Attempt to create an object with a negative number of product instances");
-            return new Wear(wear.PurchasePrice, wear.Name, wear.MarkUp, wear.Amount - (uint)amount);
+            return new Wear(wear.PurchasePrice, wear.Name, wear.MarkUp, wear.Amount - amount);
         }
         public static Wear operator +(Wear one, Wear two)
         {

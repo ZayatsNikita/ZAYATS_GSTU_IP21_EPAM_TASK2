@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProductLib.ProductExceptions
 {
-    class ProductPriceException : ArgumentException
+    public class ProductPriceException : ArgumentException
     {
         public ProductPriceException(string message)
             : base(message) { }

@@ -26,7 +26,7 @@ namespace ProductLib
             foreach (Product product in products)
             {
                 Products.Add(product);
-                Parameters.Add(product.GetType().Name);
+                Parameters.Add((product?.GetType().Name ?? "nullName"));
             }
         }
         public List<Product> Products { get; set; }
