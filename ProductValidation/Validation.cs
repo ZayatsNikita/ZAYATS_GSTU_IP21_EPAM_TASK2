@@ -1,18 +1,15 @@
-﻿using System.Linq;
-
-namespace ProductLib.ProductValidation
+﻿namespace ProductLib.ProductValidation
 {
     /// <summary>
     /// A class used for data validation.
     /// </summary>
-    internal class Validation
+    public class Validation
     {
         /// <summary>
         /// Static constructor for initializing a list that stores the names of allowed products
         /// </summary>
         static Validation()
         {
-            //typesOfProduct = typeof(Product).Assembly.ExportedTypes.Where(x => x.BaseType == typeof(Product)).Select(x=>x.Name).ToArray();
             typesOfProduct = typeof(ProductModels).GetEnumNames();
         }
         private static string[] typesOfProduct;

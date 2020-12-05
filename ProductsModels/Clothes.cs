@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProductLib.ProductExceptions;
+﻿using ProductLib.ProductExceptions;
+using System;
 
 namespace ProductLib
 {
