@@ -1,42 +1,42 @@
-{
-  "Products": [
-    {
-      "PurchasePrice": 10.23,
-      "Name": "Samsung s6",
-      "MarkUp": 127.3,
-      "Amount": 10
-    },
-    {
-      "PurchasePrice": 10.23,
-      "Name": "Samsung s6",
-      "MarkUp": 127.3,
-      "Amount": 10
-    },
-    {
-      "PurchasePrice": 5.21,
-      "Name": "kofta n7",
-      "MarkUp": 16,
-      "Amount": 10
-    },
-    {
-      "PurchasePrice": 473.6,
-      "Name": "meizu note 9",
-      "MarkUp": 150,
-      "Amount": 1
-    },
-    {
-      "PurchasePrice": 67.83,
-      "Name": "mi band 5",
-      "MarkUp": 17,
-      "Amount": 1
-    }
-  ],
-  "Parameters": [
-    "Electronics",
-    "Electronics",
-    "Wear",
-    "Electronics",
-    "Food"
-  ],
-  "Length": 5
-}
+[
+  {
+    "TypeOfProduct": "Electronics",
+    "PurchasePrice": 10.23,
+    "Name": "Samsung s6",
+    "MarkUp": 127.3,
+    "Amount": 10
+  },
+  null,
+  {
+    "TypeOfProduct": "Electronics",
+    "PurchasePrice": 10.23,
+    "Name": "Samsung s6",
+    "MarkUp": 127.3,
+    "Amount": 10
+  },
+  null,
+  {
+    "TypeOfProduct": "Clothes",
+    "PurchasePrice": 5.21,
+    "Name": "kofta n7",
+    "MarkUp": 16,
+    "Amount": 10
+  },
+  null,
+  {
+    "TypeOfProduct": "Electronics",
+    "PurchasePrice": 473.6,
+    "Name": "meizu note 9",
+    "MarkUp": 150,
+    "Amount": 1
+  },
+  null,
+  {
+    "TypeOfProduct": "Food",
+    "PurchasePrice": 67.83,
+    "Name": "mi band 5",
+    "MarkUp": 17,
+    "Amount": 1
+  },
+  null
+]
